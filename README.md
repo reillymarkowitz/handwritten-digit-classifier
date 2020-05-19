@@ -22,10 +22,10 @@ Test your installation:
 
     virtualenv --version
 
-Create a new virtualenv using a copy of Python 3:
+Create a new virtualenv:
 
     cd handwritten-digit-classifier
-    virtualenv -p /path/to/python3 venv
+    virtualenv venv
 
 ### Activate the virtual environment:
 
