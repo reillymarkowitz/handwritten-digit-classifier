@@ -1,7 +1,8 @@
 import keras
 from numpy import ndarray
 from keras.datasets import mnist
-
+from keras.models import Sequential
+from keras.layers import Dense
 
 class DigitClassifier:
     def __init__(self):
@@ -32,4 +33,15 @@ class DigitClassifier:
         return keras.utils.to_categorical(columnVector, self.num_digits)
 
 
+    def initialize_model(self) -> None:
+        self.model = Sequential()
+
+        self.model.add(Dense(units=32, activation='sigmoid', input_shape=(self.image_size,)))
+        self.model.add(Dense(units=32, activation='sigmoid'))
+        self.model.add(Dense(units=self.num_digits, activation='softmax'))
+
+
 classifier = DigitClassifier()
+
+classifier.initialize_model()
+
