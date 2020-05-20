@@ -1,9 +1,8 @@
-import keras
-from numpy import ndarray
 from keras.datasets import mnist
 from keras.callbacks import History
 from model import Model
 from plotter import Plotter
+from vector_utils import VectorUtils
 
 
 class DigitClassifier:
@@ -17,17 +16,11 @@ class DigitClassifier:
         self.shape_data()
 
     def shape_data(self) -> None:
-        self.x_train = self.to_column_vector(self.x_train)
-        self.x_test = self.to_column_vector(self.x_test)
+        self.x_train = VectorUtils.to_column_vector(matrix=self.x_train, column_length=self.image_size)
+        self.x_test = VectorUtils.to_column_vector(matrix=self.x_test, column_length=self.image_size)
 
-        self.y_train = self.to_categorical(self.y_train)
-        self.y_test = self.to_categorical(self.y_test)
-
-    def to_column_vector(self, matrix: ndarray) -> ndarray:
-        return matrix.reshape(matrix.shape[0], self.image_size)
-
-    def to_categorical(self, column_vector: ndarray) -> ndarray:
-        return keras.utils.to_categorical(column_vector, self.num_digits)
+        self.y_train = VectorUtils.to_categorical_matrix(column_vector=self.y_train, num_rows=self.num_digits)
+        self.y_test = VectorUtils.to_categorical_matrix(column_vector=self.y_test, num_rows=self.num_digits)
 
     def compile_model(self) -> None:
         self.model.compile()
