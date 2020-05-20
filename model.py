@@ -1,5 +1,6 @@
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.callbacks import History
 
 
 class Model(Sequential):
@@ -16,3 +17,6 @@ class Model(Sequential):
 
     def compile(self) -> None:
         super().compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
+
+    def train(self, x_train, y_train) -> History:
+        return self.fit(x_train, y_train, batch_size=128, epochs=50, validation_split=.1)

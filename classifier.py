@@ -1,9 +1,9 @@
 import keras
-import matplotlib.pyplot as plt
 from numpy import ndarray
-from model import Model
 from keras.datasets import mnist
 from keras.callbacks import History
+from model import Model
+from plotter import Plotter
 
 
 class DigitClassifier:
@@ -29,19 +29,23 @@ class DigitClassifier:
     def to_categorical(self, column_vector: ndarray) -> ndarray:
         return keras.utils.to_categorical(column_vector, self.num_digits)
 
-    def train_model(self) -> History:
-        return self.model.fit(self.x_train, self.y_train, batch_size=128, epochs=50, validation_split=.1)
+    def compile_model(self) -> None:
+        self.model.compile()
 
-    def evaluate_model(self) -> tuple:
-        return self.model.evaluate(self.x_test, self.y_test)
+    def train_model(self) -> History:
+        return self.model.train(self.x_train, self.y_train)
+
+    def evaluate_model(self) -> None:
+        test_loss, test_accuracy = self.model.evaluate(self.x_test, self.y_test)
+        print(f'Test loss: {test_loss:.3}')
+        print(f'Test accuracy: {test_accuracy:.3}')
 
 
 classifier = DigitClassifier()
-
-classifier.model.compile()
+classifier.compile_model()
 
 training_result = classifier.train_model()
+history = training_result.history
+Plotter.plot(history['accuracy'], history['val_accuracy'])
 
-test_loss, test_accuracy = classifier.evaluate_model()
-print(f'Test loss: {test_loss:.3}')
-print(f'Test accuracy: {test_accuracy:.3}')
+classifier.evaluate_model()
