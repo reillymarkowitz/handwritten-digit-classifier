@@ -10,9 +10,6 @@ class DigitClassifier:
 
         self.model = Model(input_size=self.image_size, output_size=self.num_digits)
 
-    def compile_model(self) -> None:
-        self.model.compile()
-
     def train_model(self, x_train: ndarray, y_train: ndarray) -> History:
         return self.model.train(x_train, y_train)
 

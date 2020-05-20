@@ -6,10 +6,12 @@ from keras.callbacks import History
 class Model(Sequential):
     def __init__(self, input_size: int, output_size: int):
         super().__init__()
+
         self.input_size = input_size
         self.output_size = output_size
+
         self.construct()
-        # self.compile() ?
+        self.compile()
 
     def construct(self) -> None:
         self.add(Dense(units=32, activation='sigmoid', input_shape=(self.input_size,)))
