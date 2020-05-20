@@ -1,7 +1,7 @@
 from typing import Tuple
 from keras.datasets import mnist
 from numpy import ndarray
-from vector_utils import VectorUtils
+from src.vector_utils import VectorUtils
 
 
 class DataProvider:
