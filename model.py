@@ -9,6 +9,7 @@ class Model(Sequential):
         self.input_size = input_size
         self.output_size = output_size
         self.construct()
+        # self.compile() ?
 
     def construct(self) -> None:
         self.add(Dense(units=32, activation='sigmoid', input_shape=(self.input_size,)))
