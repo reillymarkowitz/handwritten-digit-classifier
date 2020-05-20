@@ -41,7 +41,18 @@ class DigitClassifier:
         self.model.add(Dense(units=self.num_digits, activation='softmax'))
 
 
+    def compile_model(self) -> None:
+        self.model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
+
+
+    def train_model(self) -> History:
+        return self.model.fit(self.x_train, self.y_train, batch_size=128, epochs=50, verbose=True, validation_split=.1)
+
+
 classifier = DigitClassifier()
 
 classifier.initialize_model()
+classifier.compile_model()
 
+training_result = classifier.train_model()
+classifier.plot_history(training_result)
