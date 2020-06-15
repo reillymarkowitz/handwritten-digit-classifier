@@ -14,8 +14,13 @@ class Model(Sequential):
         self.compile()
 
     def construct(self) -> None:
-        self.add(Dense(units=32, activation='sigmoid', input_shape=(self.input_size,)))
-        self.add(Dense(units=32, activation='sigmoid'))
+        hidden_layers = [32, 32]
+
+        self.add(Dense(units=hidden_layers[0], activation='sigmoid', input_shape=(self.input_size,)))
+
+        for layer in hidden_layers[1:]:
+            self.add(Dense(units=layer, activation='sigmoid'))
+
         self.add(Dense(units=self.output_size, activation='softmax'))
 
     def compile(self) -> None:

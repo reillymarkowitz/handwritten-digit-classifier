@@ -1,6 +1,6 @@
-from src.classifier import DigitClassifier
-from src.data_provider import DataProvider
-from src.plotter import Plotter
+from classifier import DigitClassifier
+from data_provider import DataProvider
+from plotter import Plotter
 
 classifier = DigitClassifier()
 provider = DataProvider(classifier.image_size, classifier.num_digits)

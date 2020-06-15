@@ -1,6 +1,6 @@
 from keras.callbacks import History
 from numpy import ndarray
-from src.model import Model
+from model import Model
 
 
 class DigitClassifier:
