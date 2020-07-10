@@ -14,7 +14,7 @@ class Model(Sequential):
         self.compile()
 
     def construct(self) -> None:
-        hidden_layers = [32, 32]
+        hidden_layers = [2500, 2000, 1500, 1000, 500]
 
         self.add(Dense(units=hidden_layers[0], activation='sigmoid', input_shape=(self.input_size,)))
 
@@ -27,4 +27,4 @@ class Model(Sequential):
         super().compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
 
     def train(self, x_train, y_train) -> History:
-        return self.fit(x_train, y_train, batch_size=128, epochs=50, validation_split=.1)
+        return self.fit(x_train, y_train, batch_size=128, epochs=200, validation_split=.1)
